@@ -1,12 +1,12 @@
 # Karing iOS 纯净去广告规则源（规则集导入模板）
 # 适用：Karing / Clash / Sing-Box / Surge
 # 策略动作：REJECT
+# 说明：DOMAIN-SUFFIX 父级后缀自动覆盖全部子域名，子域名不再逐个单列
+# （如 jpush.cn 已覆盖 tsis/stats 等所有子域名），规则更短、效果不变。
 
 payload:
   # ==================== 1. 腾讯移动广告联盟 (GDT / 优量汇) ====================
   - DOMAIN-SUFFIX,gdt.qq.com
-  - DOMAIN-SUFFIX,mi.gdt.qq.com
-  - DOMAIN-SUFFIX,win.gdt.qq.com
   - DOMAIN-SUFFIX,tmead.y.qq.com
 
   # ==================== 2. 字节跳动穿山甲广告联盟 (Pangle) ====================
@@ -17,30 +17,22 @@ payload:
   - DOMAIN-SUFFIX,toblog.ctobsnssdk.com
 
   # ==================== 3. 极光推送与实时弹窗广告 (JPush - 实测哈啰摇一摇核心) ====================
+  # 注意：整段拦截可能影响其他 App 的极光推送通知，详见 README「副作用提醒」
   - DOMAIN-SUFFIX,jpush.cn
-  - DOMAIN-SUFFIX,tsis.jpush.cn
-  - DOMAIN-SUFFIX,ali-stats.jpush.cn
-  - DOMAIN-SUFFIX,stats.jpush.cn
 
   # ==================== 4. 友盟数据统计与陀螺仪埋点 (Umeng - 摇一摇传感器上报) ====================
+  # 注意：整段拦截可能影响其他 App 的友盟推送/统计，详见 README「副作用提醒」
   - DOMAIN-SUFFIX,umeng.com
-  - DOMAIN-SUFFIX,alogs.umeng.com
-  - DOMAIN-SUFFIX,utoken.umeng.com
-  - DOMAIN-SUFFIX,errnewlog.umeng.com
 
   # ==================== 5. 快手移动广告联盟 (AdKwai) ====================
   - DOMAIN-SUFFIX,adkwai.com
   - DOMAIN-SUFFIX,e.kuaishou.com
-  - DOMAIN-SUFFIX,open.e.kuaishou.com
 
   # ==================== 6. 一帆互联广告与白兔分发 (实测小白学习打印核心广告源) ====================
   - DOMAIN-SUFFIX,yfanads.com
-  - DOMAIN-SUFFIX,tracker.yfanads.com
   - DOMAIN-SUFFIX,baertt.com
-  - DOMAIN-SUFFIX,s.baertt.com
-  - DOMAIN-SUFFIX,qmlog.baertt.com
 
-  # ==================== 7. 百度百青藤移动移动广告联盟 ====================
+  # ==================== 7. 百度百青藤移动广告联盟 ====================
   - DOMAIN-SUFFIX,mobads.baidu.com
   - DOMAIN-SUFFIX,mobads-logs.baidu.com
   - DOMAIN-SUFFIX,cpro.baidustatic.com

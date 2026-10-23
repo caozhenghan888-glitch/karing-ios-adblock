@@ -1,0 +1,2 @@
+# capture_ads.py 运行依赖
+websockets>=12.0

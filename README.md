@@ -24,16 +24,16 @@
 ### 步骤 2：提取关键连接信息（地址、端口与密钥）
 在 Safari 顶部的地址栏中，你会看到类似下面的一长串本地控制网址：
 ```text
-http://127.0.0.1:3072/?hostname=127.0.0.1&port=3057&secret=62d57a0a902d569e#/proxies
+http://127.0.0.1:3072/?hostname=127.0.0.1&port=3057&secret=YOUR_SECRET#/proxies
 ```
 **只需复制整段网址，或者提取其中的 3 个核心参数**：
 - **Web 访问地址**：`127.0.0.1:3072`
 - **内核通信端口 (`port`)**：`3057`
-- **安全密钥 (`secret`)**：`62d57a0a902d569e`
+- **安全密钥 (`secret`)**：`YOUR_SECRET`
 
 ### 步骤 3：把信息交给 AI 智能体
 把这行信息直接发给你的 AI 智能体（比如 Minis / 拥有终端与网络能力的 AI）：
-> *“我已经打开 Karing 面板了，地址是：`127.0.0.1:3072/?hostname=127.0.0.1&port=3057&secret=xxxxxx`，帮我抓包分析 XX App 的广告域名！”*
+> *“我已经打开 Karing 面板了，地址是：`127.0.0.1:3072/?hostname=127.0.0.1&port=3057&secret=YOUR_SECRET XX App 的广告域名！”*
 
 AI 智能体收到后会：
 1. 自动调用 WebSocket / REST API 连入 Karing 内核的 `3057` 端口，开始毫秒级实时监听。
@@ -86,6 +86,9 @@ AI 智能体收到后会：
 ### 3. 放行局域网（防影响内网打印）
 - 在「分流规则」页面顶部，确保开启 **「私有网络直连」**。
 
+### 4. 副作用提醒（知情取舍）
+- 本规则集对 `jpush.cn`、`umeng.com` 采用整段拦截：实测哈啰出行、小白打印的核心业务不受影响，但**其他 App 若走极光推送 / 友盟推送，通知到达可能受影响**。若发现某个 App 收不到推送，可先临时放行这两个域名验证，再决定是否长期保留拦截。
+
 ---
 
 ## 四、关于微信小程序广告的技术真相
@@ -103,11 +106,14 @@ AI 智能体收到后会：
 ```text
 # 腾讯移动广告联盟 (优量汇)
 gdt.qq.com
+tmead.y.qq.com
 
 # 字节跳动穿山甲广告联盟 (摇一摇主力)
 pglstatp-toutiao.com
 pangolin-sdk-toutiao.com
+pangolin-sdk-toutiao-b.com
 pangle.io
+toblog.ctobsnssdk.com
 
 # 极光推送与弹窗通道 (哈啰出行等)
 jpush.cn
@@ -122,4 +128,9 @@ baertt.com
 # 快手移动广告联盟
 adkwai.com
 e.kuaishou.com
+
+# 百度百青藤广告联盟
+mobads.baidu.com
+mobads-logs.baidu.com
+cpro.baidustatic.com
 ```
